@@ -1,0 +1,33 @@
+  ### What Has Been Fixed                                                                                                   
+                                                                                                                            
+  We assigned 192.168.56.102/24 to Kalis eth1 interface. Now all traffic to 192.168.56.2 routes directly over the Host-    
+  Only network with source IP 192.168.56.102.                                                                               
+                                                                                                                            
+                                                         
+                                                    
+   What You Can Do Now                                                                                                   
+                                                                                                                            
+  #### 1. Send Requests from Your Kali Terminal                                                                             
+                                                                                                                            
+  Run this in your Kali prompt:                                                                                             
+                                                                                                                           
+    curl -i http://192.168.56.2:8080/                                                                                       
+                                                                                                                            
+  Watch the counter on http://127.0.0.1:5000/ increase in real-time.                                                        
+                                                                                                                            
+  #### 2. Test the "Clear Kali Requests" Button                                                                             
+                                                                                                                            
+  Click the Clear Kali Requests button on the dashboard to verify that it wipes the Kali logs and resets the counter to     
+  0.                                                                                                                        
+                                                                                                                            
+  #### 3. Test Phase 2 (The Defense)                                                                                        
+                                                                                                                            
+  In a Windows PowerShell (Run as Administrator) window, enable the defense block rule:                                     
+                                                                                                                            
+    Set-NetFirewallRule -DisplayName "CyberLab - Block Kali" -Enabled True                                                  
+                                                                                                                            
+  Then send another request from Kali:                                                                                      
+                                                                                                                            
+    curl -m 3 -i http://192.168.56.2:8080/                                                                                  
+                                                                                                                            
+  The request will time out because Windows Firewall drops the packet before it reaches port 8080.                          

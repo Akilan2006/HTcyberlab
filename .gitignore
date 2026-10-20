@@ -1,0 +1,11 @@
+# Security & Secrets
+.env
+*.env
+*.key
+*api_key*
+gemini_api_key.txt
+*.log
+
+# Python cache
+__pycache__/
+*.pyc
